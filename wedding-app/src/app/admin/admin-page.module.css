@@ -1,0 +1,256 @@
+/* Shared admin page styles */
+.page { max-width: 900px; }
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #1A1208;
+}
+
+.saveBtn {
+  padding: 10px 24px;
+  background: #C9A96E;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.saveBtn:hover:not(:disabled) { background: #A07840; transform: translateY(-1px); }
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Groups */
+.group {
+  background: white;
+  border: 1px solid #E8D8C4;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.groupTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #C9A96E;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F5EDD8;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8C7260;
+  letter-spacing: 0.04em;
+}
+
+.input, .textarea {
+  padding: 10px 14px;
+  border: 1.5px solid #E8D8C4;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  color: #2C2420;
+  background: #FAF6F0;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: #C9A96E;
+  background: white;
+}
+
+.uploadRow { margin-top: 6px; }
+
+.uploadLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #F5EDD8;
+  border: 1.5px dashed #C9A96E;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #A07840;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.uploadLabel:hover { background: #EDD8B0; }
+
+.fileInput { display: none; }
+
+/* Milestones / Gallery list items */
+.itemList { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+
+.item {
+  background: white;
+  border: 1px solid #E8D8C4;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.itemImg {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #E8D8C4;
+  flex-shrink: 0;
+}
+
+.itemImgPlaceholder {
+  width: 80px;
+  height: 60px;
+  background: #F5EDD8;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.itemContent { flex: 1; min-width: 0; }
+
+.itemDate {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #C9A96E;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.itemTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #2C2420;
+  margin-bottom: 4px;
+}
+
+.itemDesc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  color: #8C7260;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.itemActions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.editBtn, .deleteBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.editBtn { background: #F5EDD8; color: #A07840; }
+.editBtn:hover { background: #C9A96E; color: white; }
+
+.deleteBtn { background: #FFF0F0; color: #e74c3c; }
+.deleteBtn:hover { background: #e74c3c; color: white; }
+
+/* Add button */
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #1A1208;
+  color: #C9A96E;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.addBtn:hover { background: #2C1F10; }
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+}
+
+.modalBox {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modalTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #2C2420;
+  margin-bottom: 24px;
+}
+
+.modalForm { display: flex; flex-direction: column; gap: 16px; }
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  border: 1.5px solid #E8D8C4;
+  background: white;
+  color: #8C7260;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}

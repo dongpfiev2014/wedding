@@ -1,0 +1,88 @@
+.page { max-width: 900px; }
+
+.header { margin-bottom: 40px; }
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #1A1208;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  color: #8C7260;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #E8D8C4;
+  border-radius: 16px;
+  padding: 28px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover::before { opacity: 0.06; }
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  border-color: #C9A96E;
+}
+
+.cardIcon {
+  font-size: 2.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #2C2420;
+  position: relative;
+  z-index: 1;
+}
+
+.cardDesc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  color: #8C7260;
+  line-height: 1.5;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.cardArrow {
+  font-size: 1.2rem;
+  color: #C9A96E;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s;
+}
+
+.card:hover .cardArrow { transform: translateX(4px); }

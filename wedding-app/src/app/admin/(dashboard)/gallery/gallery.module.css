@@ -1,0 +1,76 @@
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #C9A96E;
+  border-radius: 12px;
+  padding: 32px;
+  background: #FAF6F0;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: background 0.2s;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: #A07840;
+  font-weight: 600;
+}
+.dropZone:hover { background: #F5EDD8; }
+
+.uploadMsg {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: #C9A96E;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.photoCard {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #E8D8C4;
+  aspect-ratio: 4/3;
+}
+
+.photo {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.delBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(231,76,60,0.85);
+  color: white;
+  border: none;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.photoCard:hover .delBtn { opacity: 1; }
+
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px;
+  color: #8C7260;
+}
+.empty span { font-size: 3rem; display: block; margin-bottom: 12px; }
+.empty p { font-family: 'Montserrat', sans-serif; font-size: 0.88rem; }

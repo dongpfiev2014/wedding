@@ -1,0 +1,331 @@
+/* ── InvitationCard Section ── */
+.section {
+  padding: 96px 0;
+  background: var(--color-bg-alt);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Tab switcher ── */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.tab {
+  padding: 11px 30px;
+  border-radius: 50px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.tab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.tabActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+/* ── Card wrapper animation ── */
+.cardWrapper {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: relative;
+}
+.cardVisible { opacity: 1; transform: translateY(0); pointer-events: all; }
+.cardHidden  { opacity: 0; transform: translateY(14px); pointer-events: none; position: absolute; width: 100%; }
+
+/* ── 2-column invitation card ── */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+/* LEFT column */
+.cardLeft {
+  padding: 48px 36px;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+/* "TRÂN TRỌNG KÍNH MỜI" */
+.kinhMoi {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.dotLine {
+  width: 100%;
+  border-bottom: 1px dashed var(--color-border);
+  margin: 10px 0;
+}
+
+/* "Đến dự lễ…" */
+.denDu {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* Couple names block */
+.namesBlock {
+  margin: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.scriptName {
+  font-family: var(--font-script);
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  color: var(--color-primary);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.ampersand {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin: 2px 0;
+}
+
+/* Venue label + address */
+.venueLabel {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-primary);
+  margin-top: 14px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.venueAddress {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+
+/* Time & date */
+.timeLabel {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+}
+
+.bigDate {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.07em;
+  margin: 6px 0;
+}
+
+.lunarDate {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.hanHanh {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 8px 0 16px;
+}
+
+/* Family section */
+.families {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+.familySide { text-align: center; }
+
+.familyTitle {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-text-light);
+  margin-bottom: 5px;
+}
+
+.familyName {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+
+.familyGroom {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-primary);
+  margin-top: 4px;
+}
+
+/* RIGHT column */
+.cardRight {
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+.doubleHappiness {
+  font-size: 3.2rem;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+/* Mini Calendar */
+.calendar {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.calMonth {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calHeader {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  padding: 4px 0;
+  letter-spacing: 0.05em;
+}
+
+.calDay {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 4px 0;
+  color: var(--color-text-muted);
+  position: relative;
+  line-height: 1.5;
+}
+
+.heart1 { color: transparent; }
+.heart2 { color: transparent; }
+
+.heartIcon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.heartIconFilled {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* Ceremony name script */
+.ceremonyScript {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--color-primary);
+  margin: 8px 0 12px;
+  line-height: 1.2;
+}
+
+.vinh {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  line-height: 1.75;
+  margin-top: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .card { grid-template-columns: 1fr; }
+  .cardLeft {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 36px 24px;
+  }
+  .cardRight { padding: 36px 24px; }
+  .tab { padding: 9px 18px; font-size: 0.72rem; }
+}
