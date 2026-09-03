@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://linhdong-wedding.vercel.app");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://wedding.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: "💍 Đám Cưới Minh Đông & Diệu Linh — 20.09.2026",
   description:
     "Trân trọng kính mời bạn đến dự lễ thành hôn của Minh Đông & Diệu Linh ngày 20 tháng 09 năm 2026 tại Phú Thọ.",
@@ -11,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://wedding.vercel.app",
+    url: siteUrl,
     siteName: "Đám Cưới Minh Đông & Diệu Linh",
     title: "💍 Minh Đông & Diệu Linh — 20.09.2026",
     description:
