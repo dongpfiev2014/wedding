@@ -8,9 +8,16 @@ interface Props {
 
 export default function MusicPlayer({ musicUrl }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [playing, setPlaying] = useState(false);
+  const userPausedRef = useRef(false);
+  const gestureHandledRef = useRef(false);
+  const prevSrcRef = useRef<string | null>(null);
 
-  const src = musicUrl || "/music/young-and-beautiful.mp3";
+  const src =
+    musicUrl && musicUrl.trim() !== ""
+      ? musicUrl
+      : "/music/young-and-beautiful.mp3";
 
   const playAudio = useCallback(() => {
     const audio = audioRef.current;
@@ -28,20 +35,30 @@ export default function MusicPlayer({ musicUrl }: Props) {
       });
   }, []);
 
-  // 1. Attempt autoplay immediately on mount and when musicUrl loads/changes
+  // Sync src changes only if src actually changed
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.load();
+
+    if (prevSrcRef.current !== null && prevSrcRef.current !== src) {
+      audio.src = src;
+      audio.load();
+      if (!userPausedRef.current) {
+        playAudio();
+      }
+    }
+    prevSrcRef.current = src;
+  }, [src, playAudio]);
+
+  // Initial autoplay attempt on mount
+  useEffect(() => {
     playAudio();
-  }, [musicUrl, playAudio]);
+  }, [playAudio]);
 
-  // 2. Guarantee non-stop continuous loop (replays indefinitely)
+  // Guarantee non-stop continuous loop
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    audio.loop = true;
 
     const handleEnded = () => {
       audio.currentTime = 0;
@@ -54,46 +71,62 @@ export default function MusicPlayer({ musicUrl }: Props) {
     };
   }, []);
 
-  // 3. Auto-play on first user gesture anywhere on the page
+  // Auto-play on first user gesture anywhere on page, ignoring clicks on the button itself
   useEffect(() => {
-    if (playing) return;
-
-    const handleUserGesture = () => {
+    const handleWeddingMusic = () => {
+      userPausedRef.current = false;
       playAudio();
     };
 
-    const events = ["click", "touchstart", "pointerdown", "keydown"];
-    events.forEach((evt) => {
-      window.addEventListener(evt, handleUserGesture, {
-        capture: true,
-        once: true,
-        passive: true,
-      });
-    });
+    const handleFirstGesture = (e: Event) => {
+      // If user clicked directly on the player button, let toggle handle it
+      const target = e.target as HTMLElement | null;
+      if (buttonRef.current && target && buttonRef.current.contains(target)) {
+        return;
+      }
 
-    window.addEventListener("play-wedding-music", handleUserGesture);
+      if (gestureHandledRef.current) return;
+      gestureHandledRef.current = true;
+
+      if (!userPausedRef.current) {
+        playAudio();
+      }
+    };
+
+    window.addEventListener("play-wedding-music", handleWeddingMusic);
+    window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
 
     return () => {
-      events.forEach((evt) => {
-        window.removeEventListener(evt, handleUserGesture, { capture: true });
-      });
-      window.removeEventListener("play-wedding-music", handleUserGesture);
+      window.removeEventListener("play-wedding-music", handleWeddingMusic);
+      window.removeEventListener("click", handleFirstGesture);
+      window.removeEventListener("touchstart", handleFirstGesture);
     };
-  }, [playing, playAudio]);
+  }, [playAudio]);
 
-  const toggle = () => {
+  const toggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const audio = audioRef.current;
     if (!audio) return;
-    if (playing) {
+
+    gestureHandledRef.current = true;
+
+    if (!audio.paused) {
       audio.pause();
+      userPausedRef.current = true;
       setPlaying(false);
     } else {
+      userPausedRef.current = false;
       audio.volume = 0.5;
       audio.loop = true;
       audio
         .play()
-        .then(() => setPlaying(true))
-        .catch(() => {});
+        .then(() => {
+          setPlaying(true);
+        })
+        .catch((err) => {
+          console.warn("Play error:", err);
+        });
     }
   };
 
@@ -104,10 +137,13 @@ export default function MusicPlayer({ musicUrl }: Props) {
         src={src}
         preload="auto"
         loop
-        autoPlay
         playsInline
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
       />
       <button
+        ref={buttonRef}
+        type="button"
         className={`${styles.player} ${playing ? styles.playing : ""}`}
         onClick={toggle}
         aria-label={playing ? "Tạm dừng nhạc" : "Phát nhạc"}

@@ -58,7 +58,7 @@ export default function Memories() {
               className={styles.photoCard}
               onClick={() => setLightbox(p.url)}
             >
-              <Image src={p.url} alt={p.caption} width={280} height={200} className={styles.photo} />
+              <Image src={p.url} alt={p.caption} width={320} height={360} className={styles.photo} />
             </div>
           ))}
         </div>
@@ -73,7 +73,7 @@ export default function Memories() {
               className={styles.photoCard}
               onClick={() => setLightbox(p.url)}
             >
-              <Image src={p.url} alt={p.caption} width={280} height={200} className={styles.photo} />
+              <Image src={p.url} alt={p.caption} width={320} height={360} className={styles.photo} />
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import styles from "./Journey.module.css";
 
@@ -8,8 +8,107 @@ interface Milestone {
   date: string;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrls: string[];
+  // backward compat with old single-image data
+  imageUrl?: string;
   order: number;
+}
+
+/** Returns the array of image URLs for a milestone, handling old single-imageUrl data */
+function getImages(m: Milestone): string[] {
+  if (m.imageUrls && m.imageUrls.length > 0) return m.imageUrls;
+  if (m.imageUrl) return [m.imageUrl];
+  return [];
+}
+
+/* ── Mini image carousel inside each milestone card ── */
+function ImageCarousel({ images, title }: { images: string[]; title: string }) {
+  const [active, setActive] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const goTo = useCallback(
+    (idx: number) => {
+      setActive((idx + images.length) % images.length);
+    },
+    [images.length]
+  );
+
+  // Auto-advance every 3.5 s when more than one image
+  useEffect(() => {
+    if (images.length <= 1) return;
+    timerRef.current = setTimeout(() => goTo(active + 1), 3500);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [active, images.length, goTo]);
+
+  if (images.length === 0) return null;
+
+  return (
+    <div className={styles.carousel}>
+      {/* Slides */}
+      {images.map((src, i) => (
+        <div
+          key={src + i}
+          className={`${styles.slide} ${i === active ? styles.slideActive : ""}`}
+        >
+          <Image
+            src={src}
+            alt={`${title} – ảnh ${i + 1}`}
+            fill
+            className={styles.image}
+            sizes="(max-width: 820px) 100vw, 420px"
+          />
+        </div>
+      ))}
+
+      {/* Prev / Next arrows – only when > 1 image */}
+      {images.length > 1 && (
+        <>
+          <button
+            className={`${styles.carouselArrow} ${styles.arrowPrev}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              goTo(active - 1);
+            }}
+            aria-label="Ảnh trước"
+          >
+            ‹
+          </button>
+          <button
+            className={`${styles.carouselArrow} ${styles.arrowNext}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              goTo(active + 1);
+            }}
+            aria-label="Ảnh sau"
+          >
+            ›
+          </button>
+
+          {/* Dot indicators */}
+          <div className={styles.carouselDots}>
+            {images.map((_, i) => (
+              <button
+                key={i}
+                className={`${styles.carouselDot} ${i === active ? styles.dotActive : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goTo(i);
+                }}
+                aria-label={`Ảnh ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Counter */}
+          <span className={styles.carouselCounter}>
+            {active + 1} / {images.length}
+          </span>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default function Journey() {
@@ -27,10 +126,7 @@ export default function Journey() {
       .catch(() => setLoading(false));
   }, []);
 
-  // Continuous scroll animation:
-  // As item enters viewport center (diff→0): image slides INWARD toward center axis,
-  // stopping so its inner edge is exactly `gap` (36px) from center.
-  // As item leaves center (diff→±1.2): image returns to its natural column position.
+  // Continuous scroll animation
   useEffect(() => {
     let ticking = false;
 
@@ -50,7 +146,6 @@ export default function Journey() {
               Math.min(1.2, (itemCenter - screenCenter) / (vh * 0.45))
             );
 
-            // How far the image has "arrived": 1 = fully centered, 0 = at boundary
             const progress = 1 - Math.abs(diff) / 1.2;
             const isMobile = window.innerWidth <= 820;
 
@@ -82,7 +177,6 @@ export default function Journey() {
               }
             }
 
-
             if (rect.top < vh * 0.95 && rect.bottom > vh * 0.05) {
               item.classList.add(styles.visible);
             } else {
@@ -110,8 +204,8 @@ export default function Journey() {
   return (
     <section id="journey" className={styles.section} ref={sectionRef}>
       <div className={styles.container}>
-        <p className={styles.subtitle}>HÀNH TRÌNH CỦA CHÚNG MÌNH</p>
-        <h2 className={styles.title}>Những Khoảnh Khắc Đáng Nhớ</h2>
+        {/* <p className={styles.subtitle}>HÀNH TRÌNH CỦA CHÚNG MÌNH</p> */}
+        <h2 className={styles.title}>Khoảnh Khắc Đáng Nhớ</h2>
         <div className={styles.divider} />
 
         {loading ? (
@@ -127,6 +221,7 @@ export default function Journey() {
 
             {milestones.map((m, i) => {
               const isLeft = i % 2 === 0;
+              const images = getImages(m);
               return (
                 <div
                   key={m._id}
@@ -146,16 +241,10 @@ export default function Journey() {
                     <span className={styles.dotHeart}>♥</span>
                   </div>
 
-                  {/* Image */}
+                  {/* Images */}
                   <div className={styles.imageBox}>
-                    {m.imageUrl ? (
-                      <Image
-                        src={m.imageUrl}
-                        alt={m.title}
-                        fill
-                        className={styles.image}
-                        sizes="(max-width: 820px) 100vw, 420px"
-                      />
+                    {images.length > 0 ? (
+                      <ImageCarousel images={images} title={m.title} />
                     ) : (
                       <div className={styles.imagePlaceholder}>
                         <span className={styles.placeholderIcon}>📷</span>

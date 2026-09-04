@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "@/app/admin/admin-page.module.css";
+import { compressImage } from "@/lib/compressImage";
 
 const FIELDS = [
   { key: "groomName", label: "Tên chú rể", group: "Cặp đôi" },
@@ -75,15 +76,21 @@ export default function SettingsPage() {
 
   const uploadFile = async (key: string, file: File, uploadType: string) => {
     setUploading(key);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("folder", FOLDER_MAP[uploadType] || "wedding");
-    // Cloudinary uses "video" resource_type for both video and audio
-    formData.append("resourceType", uploadType === "image" ? "image" : "video");
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    const data = await res.json();
-    if (data.url) setSettings((prev) => ({ ...prev, [key]: data.url }));
-    setUploading(null);
+    try {
+      // Only compress images; leave video/audio as-is
+      const fileToUpload = uploadType === "image"
+        ? await compressImage(file)
+        : file;
+      const formData = new FormData();
+      formData.append("file", fileToUpload);
+      formData.append("folder", FOLDER_MAP[uploadType] || "wedding");
+      formData.append("resourceType", uploadType === "image" ? "image" : "video");
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) setSettings((prev) => ({ ...prev, [key]: data.url }));
+    } finally {
+      setUploading(null);
+    }
   };
 
   return (

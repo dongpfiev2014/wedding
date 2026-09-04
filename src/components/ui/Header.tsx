@@ -35,9 +35,9 @@ export default function Header() {
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoScript}>M</span>
+          <span className={styles.logoScript}>L</span>
           <span className={styles.logoAmp}>&</span>
-          <span className={styles.logoScript}>D</span>
+          <span className={styles.logoScript}>Đ</span>
         </Link>
 
         {/* Desktop Nav */}

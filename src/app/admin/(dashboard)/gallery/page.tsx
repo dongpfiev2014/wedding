@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/admin/admin-page.module.css";
 import galleryStyles from "./gallery.module.css";
+import { compressImage } from "@/lib/compressImage";
 
 interface Photo { _id: string; imageUrl: string; caption: string; imagePublicId: string; }
 
@@ -15,22 +16,26 @@ export default function GalleryPage() {
 
   const upload = async (files: FileList) => {
     setUploading(true);
-    for (const file of Array.from(files)) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folder", "wedding/gallery");
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        await fetch("/api/gallery", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageUrl: data.url, imagePublicId: data.publicId, caption: "", order: photos.length }),
-        });
+    try {
+      for (const file of Array.from(files)) {
+        const compressed = await compressImage(file);
+        const formData = new FormData();
+        formData.append("file", compressed);
+        formData.append("folder", "wedding/gallery");
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) {
+          await fetch("/api/gallery", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ imageUrl: data.url, imagePublicId: data.publicId, caption: "", order: photos.length }),
+          });
+        }
       }
+    } finally {
+      setUploading(false);
+      load();
     }
-    setUploading(false);
-    load();
   };
 
   const del = async (photo: Photo) => {
