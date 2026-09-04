@@ -1,5 +1,51 @@
 import type { Metadata } from "next";
+import {
+  Great_Vibes,
+  Playfair_Display,
+  Cinzel,
+  Noto_Serif,
+  Be_Vietnam_Pro,
+} from "next/font/google";
 import "./globals.css";
+
+/* ── Google Fonts — self-hosted by Next.js, Vietnamese subset guaranteed ── */
+const greatVibes = Great_Vibes({
+  weight: ["400"],
+  subsets: ["latin", "latin-ext"],  // Great Vibes covers Vietnamese via latin-ext
+  variable: "--font-script",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  subsets: ["vietnamese"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const cinzel = Cinzel({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],           // Cinzel = decorative Latin only
+  variable: "--font-cinzel",    // renamed: only use for ASCII text
+  display: "swap",
+});
+
+const notoSerif = Noto_Serif({
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["vietnamese"],      // Noto Serif = full Unicode coverage
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const beVietnam = Be_Vietnam_Pro({
+  weight: ["300", "400", "500", "700"],
+  style: ["normal", "italic"],
+  subsets: ["vietnamese"],      // Designed specifically for Vietnamese
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -41,13 +87,21 @@ export const metadata: Metadata = {
   },
 };
 
+const fontVars = [
+  greatVibes.variable,
+  playfair.variable,
+  cinzel.variable,
+  notoSerif.variable,
+  beVietnam.variable,
+].join(" ");
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" suppressHydrationWarning>
+    <html lang="vi" className={fontVars} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#C9A96E" />

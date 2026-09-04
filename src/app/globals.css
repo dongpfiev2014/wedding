@@ -1,13 +1,8 @@
 /* ====================================================
-   GOOGLE FONTS — 5-Font Wedding Typography System
-   ────────────────────────────────────────────────
-   --font-script  : Corinthia        → couple names, romantic script (very large)
-   --font-heading : Playfair Display → section titles, card headings (elegant serif)
-   --font-display : Cinzel           → small-caps badges & ALL-CAPS labels
-   --font-serif   : EB Garamond      → body copy, addresses, invitation text
-   --font-sans    : Lato             → buttons, forms, tags, calendar numbers
+   FONTS are loaded via next/font/google in layout.tsx
+   CSS variables (--font-script, --font-heading, etc.)
+   are injected automatically on <html> by Next.js.
    ==================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 
 /* ====================================================
    TYPE SCALE (shared across all themes)
@@ -57,12 +52,17 @@
   --shadow-md: 0 8px 32px rgba(44, 24, 12, 0.12);
   --shadow-lg: 0 20px 60px rgba(44, 24, 12, 0.18);
 
-  /* Fonts */
-  --font-script:   'Corinthia', cursive;
-  --font-heading:  'Playfair Display', 'Times New Roman', Georgia, serif;
-  --font-display:  'Cinzel', serif;
-  --font-serif:    'EB Garamond', 'Garamond', Georgia, serif;
-  --font-sans:     'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Fonts — variables injected by next/font/google via html className:
+     --font-script   → Great Vibes (latin-ext)
+     --font-heading  → Playfair Display (vietnamese)
+     --font-cinzel   → Cinzel (latin-only, decorative)
+     --font-serif    → Noto Serif (vietnamese)
+     --font-sans     → Be Vietnam Pro (vietnamese)
+
+     --font-display is mapped to Be Vietnam Pro so that ALL-CAPS
+     badge/subtitle text (KỶ NIỆM, SỔ LƯU BÚT, etc.) renders correctly
+     in Vietnamese. Use --font-cinzel only for pure ASCII decorative text. */
+  --font-display: var(--font-sans);
 
   /* Radius */
   --radius-sm: 8px;
