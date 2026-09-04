@@ -137,3 +137,10 @@
   letter-spacing: 0.1em;
   line-height: 1.6;
 }
+
+@media (max-width: 480px) {
+  .footer { padding: 64px 0 40px; }
+  .container { padding: 0 16px; }
+  .signatures { gap: 10px; }
+  .sig { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+}

@@ -46,7 +46,14 @@
 }
 
 @media (max-width: 480px) {
+  .switcher { gap: 5px; }
   .label { display: none; }
-  .btn { padding: 8px 10px; }
-  .swatch { width: 14px; height: 14px; }
+  .btn {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  .swatch { width: 13px; height: 13px; }
 }

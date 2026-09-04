@@ -353,3 +353,14 @@
   .cardRight { padding: 36px 24px; }
   .tab { padding: 9px 18px; font-size: 0.72rem; }
 }
+
+@media (max-width: 480px) {
+  .section { padding: 64px 0; }
+  .container { padding: 0 16px; }
+  .tabs { gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+  .tab { padding: 8px 14px; font-size: 0.7rem; }
+  .cardLeft,
+  .cardRight { padding: 28px 16px; }
+  .scriptName { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+  .ceremonyScript { font-size: clamp(2rem, 8vw, 2.6rem); }
+}

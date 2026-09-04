@@ -2,6 +2,8 @@
   padding: 100px 0;
   background: var(--color-bg);
   overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 .header {
@@ -40,10 +42,8 @@
 .rowWrapper {
   overflow: hidden;
   margin-bottom: 16px;
-}
-
-/* Mask edges for smooth fade */
-.rowWrapper {
+  width: 100%;
+  max-width: 100%;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
 }
@@ -151,3 +151,9 @@
 }
 
 .closeBtn:hover { background: rgba(255,255,255,0.2); }
+
+@media (max-width: 480px) {
+  .section { padding: 64px 0; }
+  .header { padding: 0 16px; margin-bottom: 32px; }
+  .photoCard { width: 240px; height: 280px; }
+}

@@ -33,7 +33,7 @@ export default function HomePage() {
       )}
 
       {/* Main site */}
-      <div style={{ opacity: envelopeOpened ? 1 : 0, transition: "opacity 0.8s ease" }}>
+      <div style={{ opacity: envelopeOpened ? 1 : 0, transition: "opacity 0.8s ease", overflowX: "hidden", width: "100%", maxWidth: "100vw" }}>
         <Header />
         <MusicPlayer musicUrl={settings.musicUrl} />
         <main>

@@ -272,3 +272,9 @@
     margin: 0 auto;
   }
 }
+
+@media (max-width: 480px) {
+  .section { padding: 64px 0; }
+  .container { padding: 0 16px; }
+  .grid { max-width: 100%; }
+}
