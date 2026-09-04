@@ -6,7 +6,7 @@ import MusicPlayer from "@/components/ui/MusicPlayer";
 import EnvelopeOpener from "@/components/sections/EnvelopeOpener";
 import SaveTheDate from "@/components/sections/SaveTheDate";
 import InvitationCard from "@/components/sections/InvitationCard";
-import Venue from "@/components/sections/Venue";
+
 import Countdown from "@/components/sections/Countdown";
 import Journey from "@/components/sections/Journey";
 import Memories from "@/components/sections/Memories";
@@ -39,7 +39,6 @@ export default function HomePage() {
         <main>
           <SaveTheDate settings={settings} />
           <InvitationCard settings={settings} />
-          <Venue settings={settings} />
           <Countdown />
           <Journey />
           <Memories />

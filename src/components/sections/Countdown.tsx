@@ -49,7 +49,7 @@ function FlipUnit({ value, label }: { value: number; label: string }) {
 const GOOGLE_CAL_URL =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
   "&text=Đám+Cưới+Minh+Đông+%26+Diệu+Linh" +
-  "&dates=20260920T043500Z/20260920T143500Z" +
+  "&dates=20260920T030000Z/20260920T070000Z" +
   "&details=Lễ+Thành+Hôn+của+Minh+Đông+%26+Diệu+Linh" +
   "&location=Thôn+Hồng+Thái,+Xã+Lập+Thạch,+Tỉnh+Phú+Thọ";
 

@@ -95,13 +95,11 @@
 /* Item Left: Content on Left, Image on Right */
 .itemLeft .content {
   text-align: right;
-  transform: translateX(calc(var(--scroll-diff, 0) * -20px));
   transition: transform 0.12s linear;
 }
 
 .itemLeft .imageBox {
   justify-self: start;
-  transform: translateX(calc(var(--scroll-diff, 0) * 80px));
   transition: transform 0.12s linear, box-shadow 0.3s ease;
 }
 
@@ -109,14 +107,12 @@
 .itemRight .imageBox {
   order: 1;
   justify-self: end;
-  transform: translateX(calc(var(--scroll-diff, 0) * -80px));
   transition: transform 0.12s linear, box-shadow 0.3s ease;
 }
 
 .itemRight .content {
   order: 3;
   text-align: left;
-  transform: translateX(calc(var(--scroll-diff, 0) * 20px));
   transition: transform 0.12s linear;
 }
 

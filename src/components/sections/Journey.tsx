@@ -28,8 +28,9 @@ export default function Journey() {
   }, []);
 
   // Continuous scroll animation:
-  // As user scrolls DOWN: photo smoothly pulls closer to the center axis.
-  // As user scrolls UP: photo smoothly pushes farther away from the center axis.
+  // As item enters viewport center (diff→0): image slides INWARD toward center axis,
+  // stopping so its inner edge is exactly `gap` (36px) from center.
+  // As item leaves center (diff→±1.2): image returns to its natural column position.
   useEffect(() => {
     let ticking = false;
 
@@ -44,16 +45,43 @@ export default function Journey() {
             const rect = item.getBoundingClientRect();
             const itemCenter = rect.top + rect.height / 2;
 
-            // diff:
-            // > 0 when item is below center (approaching as user scrolls down)
-            // = 0 when item is vertically centered in reading zone
-            // < 0 when item moves above center (as user continues scrolling down)
             const diff = Math.max(
               -1.2,
               Math.min(1.2, (itemCenter - screenCenter) / (vh * 0.45))
             );
 
-            item.style.setProperty("--scroll-diff", diff.toFixed(3));
+            // How far the image has "arrived": 1 = fully centered, 0 = at boundary
+            const progress = 1 - Math.abs(diff) / 1.2;
+            const isMobile = window.innerWidth <= 820;
+
+            const maxShift = 24;
+            const isLeft = item.classList.contains(styles.itemLeft);
+
+            const imageBox = item.querySelector<HTMLElement>(`.${styles.imageBox}`);
+            const content = item.querySelector<HTMLElement>(`.${styles.content}`);
+
+            if (imageBox) {
+              if (isMobile) {
+                imageBox.style.transform = "";
+              } else {
+                const imgShift = isLeft
+                  ? -progress * maxShift
+                  :  progress * maxShift;
+                imageBox.style.transform = `translateX(${imgShift.toFixed(1)}px)`;
+              }
+            }
+
+            if (content) {
+              if (isMobile) {
+                content.style.transform = "";
+              } else {
+                const contentShift = isLeft
+                  ?  progress * 16
+                  : -progress * 16;
+                content.style.transform = `translateX(${contentShift.toFixed(1)}px)`;
+              }
+            }
+
 
             if (rect.top < vh * 0.95 && rect.bottom > vh * 0.05) {
               item.classList.add(styles.visible);
@@ -77,6 +105,7 @@ export default function Journey() {
       window.removeEventListener("resize", handleScroll);
     };
   }, [milestones]);
+
 
   return (
     <section id="journey" className={styles.section} ref={sectionRef}>

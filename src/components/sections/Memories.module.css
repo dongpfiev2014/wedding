@@ -58,13 +58,13 @@
 .trackRight { animation: marqueeRight 40s linear infinite; }
 
 @keyframes marqueeLeft {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translateX(-25%); }
+  to   { transform: translateX(-75%); }
 }
 
 @keyframes marqueeRight {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from { transform: translateX(-75%); }
+  to   { transform: translateX(-25%); }
 }
 
 .track:hover {

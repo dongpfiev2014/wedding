@@ -76,6 +76,14 @@ export default function InvitationCard({ settings }: Props) {
               </div>
               <p className={styles.venueLabel}>TẠI: {settings.groomVenueTitle || "TƯ GIA NHÀ TRAI"}</p>
               <p className={styles.venueAddress}>{settings.groomVenueAddress || "Thôn Hồng Thái – Xã Lập Thạch – Tỉnh Phú Thọ"}</p>
+              <a
+                href="https://www.google.com/maps?q=21.4265580,105.4578040"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                📍 Chỉ đường Google Maps
+              </a>
               <p className={styles.timeLabel}>
                 VÀO LÚC: {settings.groomPartyTime || "...... Giờ ......"} – {settings.groomPartyDay || "THỨ BẢY"}
               </p>
@@ -105,6 +113,14 @@ export default function InvitationCard({ settings }: Props) {
               <p className={styles.ceremonyScript}>Lễ Thành Hôn</p>
               <p className={styles.venueLabel}>TẠI: {settings.groomVenueTitle || "TƯ GIA NHÀ TRAI"}</p>
               <p className={styles.venueAddress}>{settings.groomVenueAddress || "Thôn Hồng Thái – Xã Lập Thạch – Tỉnh Phú Thọ"}</p>
+              <a
+                href="https://www.google.com/maps?q=21.4265580,105.4578040"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                📍 Chỉ đường Google Maps
+              </a>
               <p className={styles.timeLabel}>
                 VÀO LÚC: {settings.groomWeddingTime || "11 GIỜ 35"} – {settings.groomWeddingDay || "CHỦ NHẬT"}
               </p>
@@ -134,6 +150,14 @@ export default function InvitationCard({ settings }: Props) {
               </div>
               <p className={styles.venueLabel}>TẠI: {settings.brideVenueTitle || "TƯ GIA NHÀ GÁI"}</p>
               <p className={styles.venueAddress}>{settings.brideVenueAddress || "Khu 4 – Ngã Ba Đồng Xuân – Thôn Thành Công – Tỉnh Phú Thọ"}</p>
+              <a
+                href="https://www.google.com/maps?q=21.4440130,105.4731350"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                📍 Chỉ đường Google Maps
+              </a>
               <p className={styles.timeLabel}>
                 VÀO LÚC: {settings.bridePartyTime || "...... Giờ ......"} – {settings.bridePartyDay || "THỨ BẢY"}
               </p>
@@ -163,6 +187,14 @@ export default function InvitationCard({ settings }: Props) {
               <p className={styles.ceremonyScript}>Lễ Vu Quy</p>
               <p className={styles.venueLabel}>TẠI: {settings.brideVenueTitle || "TƯ GIA NHÀ GÁI"}</p>
               <p className={styles.venueAddress}>{settings.brideVenueAddress || "Khu 4 – Ngã Ba Đồng Xuân – Thôn Thành Công – Tỉnh Phú Thọ"}</p>
+              <a
+                href="https://www.google.com/maps?q=21.4440130,105.4731350"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                📍 Chỉ đường Google Maps
+              </a>
               <p className={styles.timeLabel}>
                 VÀO LÚC: {settings.brideWeddingTime || "10 GIỜ 20"} – {settings.brideWeddingDay || "CHỦ NHẬT"}
               </p>

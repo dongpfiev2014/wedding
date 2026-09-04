@@ -125,6 +125,30 @@
   margin: 2px 0;
 }
 
+/* Map button */
+.mapBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  padding: 7px 18px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.mapBtn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
 /* Venue label + address */
 .venueLabel {
   font-family: var(--font-display);
