@@ -52,23 +52,27 @@
   display: flex;
   gap: 16px;
   width: max-content;
+  will-change: transform;
 }
 
 .trackLeft  { animation: marqueeLeft  40s linear infinite; }
 .trackRight { animation: marqueeRight 40s linear infinite; }
 
 @keyframes marqueeLeft {
-  from { transform: translateX(-25%); }
-  to   { transform: translateX(-75%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes marqueeRight {
-  from { transform: translateX(-75%); }
-  to   { transform: translateX(-25%); }
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 
-.track:hover {
-  animation-play-state: paused;
+/* Only pause on hover for non-touch devices */
+@media (hover: hover) {
+  .track:hover {
+    animation-play-state: paused;
+  }
 }
 
 /* Photo card */
